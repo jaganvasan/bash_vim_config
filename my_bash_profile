@@ -1,0 +1,60 @@
+# XXX/NOTE bash_profile for OSX, bashrc for Linux
+
+# don't put duplicate lines in the history. See bash(1) for more options
+# don't overwrite GNU Midnight Commander's setting of `ignorespace'.
+
+export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
+# ... or force ignoredups and ignorespace
+export HISTCONTROL=ignoreboth
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+if [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+fi
+
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+alias vi='/usr/bin/vim'
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    eval "`dircolors -b`"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    #alias grep='grep --color=auto'
+    #alias fgrep='fgrep --color=auto'
+    #alias egrep='egrep --color=auto'
+fi
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+fi
+
+export PRETTY=1
+
+# Make bash behave like vim 
+set -o vi
+
+#!/bin/bash
+function build_cscope()
+{
+    path_to_src="$1"
+
+    if [ -z "$path_to_src"]; then
+        path_to_src=`pwd`
+    fi
+
+    echo "Building cscope @ $path_to_src"
+
+    # find $path_to_src -type f \( -name "*.c" -o -name "*.cc" -o -name "*.sh" -o -name "*.py" -o -name "*.h" \) > cscope.files
+    find $path_to_src -type f \( -name "*.c" -o -name "*.cc" -o -name "*.sh" -o -name "*.h" \) > cscope.files
+    cscope -b
+}
+

@@ -1,0 +1,68 @@
+set nocompatible    " required
+filetype off        " required
+
+" Set search settings
+set ignorecase  " Ignore case by default
+set incsearch   " Incremental search
+set hlsearch    " Highlight matches
+
+" Visual cues
+set ruler           " turn on cursor position
+set showmatch       " show matching braces
+set novisualbell    " don't blink
+set nu              " use line numbers
+
+set history=50
+
+" Set up Vundle if needed
+let install_vundle=1
+let vundle_readme=expand('~/.vim/bundle/Vundle.vim/README.md')
+if !filereadable(vundle_readme)
+    echo "Installing Vundle..."
+    echo ""
+    silent !mkdir -p ~/.vim/bundle
+    silent !git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+    let install_vundle=0
+endif
+" Set the run time path
+set rtp+=~/.vim/bundle/Vundle.vim/
+call vundle#begin()
+
+" Vundle manages Vundle
+Plugin 'gmarik/vundle'
+Plugin 'altercation/vim-colors-solarized' " colour scheme
+Plugin 'Syntastic' " syntax + error highlighter
+
+" All Vundle plugins must go above this line
+if install_vundle == 0
+    echo "Installing Vundle Plugins, please wait..."
+    echo ""
+    :PluginInstall
+endif
+call vundle#end() " required
+filetype plugin indent on " required
+
+" Syntax and colors
+syntax on
+set background=dark
+let g:solarized_termcolors=256
+" colorscheme solarized
+
+" Indentation
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+set nosmartindent   " smartindent (filetype indent instead)
+set autoindent
+set cindent          
+" set cinoptions=g0:0 " No indent for public or case
+set copyindent      " above all, follow the rules above 
+" Filetype plugin indent already turned on
+
+""" Ease of Use
+" When editing a file, always jump to the last cursor position
+autocmd BufReadPost *
+\ if line("'\"") > 0 && line ("'\"") <= line("$") |
+\   exe "normal! g'\"" |
+\ endif
+
