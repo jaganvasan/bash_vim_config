@@ -5,4 +5,9 @@ git pull
 git pull --rebase*
 git stash
 
+If the username prompt is annoying, change protocols:
+git config -l # Find out if you're using https which makes git prompt for the username/password all the time
 
+git config remote.origin.url git@github.com:repo_username/project_name.git # Switch to the git protocol
+
+Better way may be to configure using SSH keys
