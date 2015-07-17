@@ -1,0 +1,6 @@
+[user]
+	name = Jagan Srinivasan
+[core]
+	editor = vim
+[commit]
+	template = /home/jagan/.git_commit_msg.txt
