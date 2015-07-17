@@ -1,0 +1,8 @@
+git clone https://github.com/username/repo_name local_folder
+git fetch (not needed if cloned for the first time - needed later to pull other changes in)
+git merge
+git pull
+git pull --rebase*
+git stash
+
+
